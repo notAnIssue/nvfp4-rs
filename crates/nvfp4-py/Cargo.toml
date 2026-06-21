@@ -1,0 +1,17 @@
+[package]
+name = "nvfp4-py"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+nvfp4-core = { path = "../nvfp4-core" }
+pyo3 = { workspace = true, features = ["extension-module"] }
+
+[lib]
+crate-type = ["cdylib"]
+
+[lints]
+workspace = true

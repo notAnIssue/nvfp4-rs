@@ -1,0 +1,19 @@
+[package]
+name = "nvfp4-cuda"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+nvfp4-core = { path = "../nvfp4-core" }
+half.workspace = true
+thiserror.workspace = true
+cudarc = { workspace = true, optional = true }
+
+[features]
+default = []
+cuda = ["dep:cudarc", "cudarc/cuda-13020"]
+
+[lints]
+workspace = true
