@@ -1,8 +1,8 @@
 use std::marker::PhantomData;
 
-use crate::{Error, QuantForm};
+use crate::{Error, QuantFormat};
 
-pub struct QuantTensor<F: QuantForm> {
+pub struct QuantTensor<F: QuantFormat> {
     pub rows: usize,
     pub cols: usize,
     pub packed: Vec<u8>,
@@ -11,7 +11,7 @@ pub struct QuantTensor<F: QuantForm> {
     _marker: PhantomData<F>,
 }
 
-impl<F: QuantForm> QuantTensor<F> {
+impl<F: QuantFormat> QuantTensor<F> {
     /// new instance of `QuantTensor`
     ///
     /// # Errors

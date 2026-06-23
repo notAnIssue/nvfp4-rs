@@ -7,7 +7,7 @@ pub mod tensor;
 use crate::e2m1::E2M1_LUT;
 pub use error::Error;
 pub use tensor::QuantTensor;
-pub trait QuantForm {
+pub trait QuantFormat {
     const BLOCK_SIZE: usize;
     const HAS_TENSOR_SCALE: bool;
 
@@ -24,7 +24,7 @@ pub trait QuantForm {
 
 pub struct Nvfp4;
 
-impl QuantForm for Nvfp4 {
+impl QuantFormat for Nvfp4 {
     const BLOCK_SIZE: usize = 16;
     const HAS_TENSOR_SCALE: bool = true;
     type MicroScaleRaw = u8;
@@ -35,3 +35,13 @@ impl QuantForm for Nvfp4 {
 }
 
 const _: () = assert!(Nvfp4::BLOCK_SIZE == 16);
+
+#[must_use]
+pub fn sum_block_indices<F: QuantFormat>() -> usize {
+    (0..F::BLOCK_SIZE).sum()
+}
+#[doc(hidden)]
+#[must_use]
+pub fn sum_block_indices_nvfp4() -> usize {
+    sum_block_indices::<Nvfp4>()
+}
